@@ -20,13 +20,13 @@ pipeline {
     }
 }
 
-        stage ('Deploy to Production'){
+        stage ('Deploy to Production Package'){
             steps{
                 timeout(time:5, unit:'DAYS'){
                     input message:'Approve PRODUCTION Deployment?'
                 }
 
-                build job: 'package'
+                build job: 'package-pipeline'
             }
             post {
                 success {
@@ -34,7 +34,7 @@ pipeline {
                 }
 
                 failure {
-                    echo ' Deployment failed.'
+                   echo ' Deployment failed.'
                 }
             }
         }
