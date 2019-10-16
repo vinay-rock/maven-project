@@ -12,9 +12,9 @@ pipeline {
                 }
             }
         }
-        stage ('Deploy to Staging'){
+       stage ('static analysis'){
             steps {
-                build job: 'Deploy-to-staging'
+                build job: 'static analysis'
             }
         }
     }
