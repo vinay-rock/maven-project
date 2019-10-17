@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     parameters {
-         string(name: 'tomcat_dev', defaultValue: '13.234.112.44', description: 'Staging Server')
-         string(name: 'tomcat_prod', defaultValue: '13.233.207.178', description: 'Production Server')
+         string(name: 'tomcat_dev', defaultValue: '13.233.198.94', description: 'Staging Server')
+         string(name: 'tomcat_prod', defaultValue: '35.154.52.61', description: 'Production Server')
     }
 
     triggers {
@@ -27,13 +27,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "scp StrictHostKeyChecking=no -i /home/ubuntu/Kub.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
+                        sh "scp -i /home/ubuntu/Kub.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "scp StrictHostKeyChecking=no -i /home/ubuntu/Kub.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
+                        sh "scp -i /home/ubuntu/Kub.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
                     }
                 }
             }
